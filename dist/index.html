@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Project</title>
-<script defer src="runtime.js"></script><script defer src="main.js"></script></head>
-<body>
+  <script defer src="runtime.js"></script><script defer src="main.js"></script></head>
+  <body>
+    <img src="#" />
+    <button class="refresh-button">New Image</button>
 
-</body>
+    <script>
+      const img = document.querySelector("img");
+      const button = document.querySelector(".refresh-button");
+      button.addEventListener("click", () => {
+        reloadImage();
+      })
+
+      function reloadImage () {
+        fetch(
+        "https://api.giphy.com/v1/gifs/translate?api_key=Zl8PtUjxog9wnUBPxSgEtMJ8BDuh7CaZ&s=cats",
+        { mode: "cors" }
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          img.src = response.data.images.original.url;
+        });
+      }
+
+      reloadImage();
+
+    </script>
+  </body>
 </html>
